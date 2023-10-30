@@ -7,13 +7,23 @@
 
 import SwiftUI
 
+struct ExpenseItem {
+    // struct containing expense details
+    let name: String
+    let type: String
+    let amount: Double
+}
+
+@Observable
+class Expenses {
+    // class containing an array of expenses
+    var items: [ExpenseItem] = [ExpenseItem]()
+}
+
 struct ContentView: View {
     var body: some View {
         VStack {
-            UserPreferencesExample()
-            Rectangle()
-                .frame(width: .infinity, height: 1)
-            CodeableExample()
+            
         }
         .padding()
     }
