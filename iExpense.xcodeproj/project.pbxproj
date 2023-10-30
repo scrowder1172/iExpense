@@ -11,6 +11,7 @@
 		52537A582AEFFADD0093D751 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52537A572AEFFADD0093D751 /* ContentView.swift */; };
 		52537A5A2AEFFADE0093D751 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52537A592AEFFADE0093D751 /* Assets.xcassets */; };
 		52537A5D2AEFFADE0093D751 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52537A5C2AEFFADE0093D751 /* Preview Assets.xcassets */; };
+		52537A642AF005100093D751 /* AtStateWithClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52537A632AF005100093D751 /* AtStateWithClasses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		52537A572AEFFADD0093D751 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		52537A592AEFFADE0093D751 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		52537A5C2AEFFADE0093D751 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		52537A632AF005100093D751 /* AtStateWithClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtStateWithClasses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 				52537A572AEFFADD0093D751 /* ContentView.swift */,
 				52537A592AEFFADE0093D751 /* Assets.xcassets */,
 				52537A5B2AEFFADE0093D751 /* Preview Content */,
+				52537A632AF005100093D751 /* AtStateWithClasses.swift */,
 			);
 			path = iExpense;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52537A642AF005100093D751 /* AtStateWithClasses.swift in Sources */,
 				52537A582AEFFADD0093D751 /* ContentView.swift in Sources */,
 				52537A562AEFFADD0093D751 /* iExpenseApp.swift in Sources */,
 			);
