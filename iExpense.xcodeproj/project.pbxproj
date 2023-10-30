@@ -16,6 +16,7 @@
 		52537A682AF030D60093D751 /* onDeleteExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52537A672AF030D60093D751 /* onDeleteExample.swift */; };
 		52537A6A2AF03BF90093D751 /* UserPreferencesExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52537A692AF03BF90093D751 /* UserPreferencesExample.swift */; };
 		52537A6C2AF04CA30093D751 /* CodeableExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52537A6B2AF04CA30093D751 /* CodeableExample.swift */; };
+		52537A6E2AF068FC0093D751 /* AddExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52537A6D2AF068FC0093D751 /* AddExpenseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		52537A672AF030D60093D751 /* onDeleteExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onDeleteExample.swift; sourceTree = "<group>"; };
 		52537A692AF03BF90093D751 /* UserPreferencesExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesExample.swift; sourceTree = "<group>"; };
 		52537A6B2AF04CA30093D751 /* CodeableExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeableExample.swift; sourceTree = "<group>"; };
+		52537A6D2AF068FC0093D751 /* AddExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,15 +63,12 @@
 		52537A542AEFFADD0093D751 /* iExpense */ = {
 			isa = PBXGroup;
 			children = (
+				52537A6F2AF069070093D751 /* TutorialFiles */,
 				52537A552AEFFADD0093D751 /* iExpenseApp.swift */,
 				52537A572AEFFADD0093D751 /* ContentView.swift */,
 				52537A592AEFFADE0093D751 /* Assets.xcassets */,
 				52537A5B2AEFFADE0093D751 /* Preview Content */,
-				52537A632AF005100093D751 /* AtStateWithClasses.swift */,
-				52537A652AF014FA0093D751 /* sheetsExample.swift */,
-				52537A672AF030D60093D751 /* onDeleteExample.swift */,
-				52537A692AF03BF90093D751 /* UserPreferencesExample.swift */,
-				52537A6B2AF04CA30093D751 /* CodeableExample.swift */,
+				52537A6D2AF068FC0093D751 /* AddExpenseView.swift */,
 			);
 			path = iExpense;
 			sourceTree = "<group>";
@@ -80,6 +79,18 @@
 				52537A5C2AEFFADE0093D751 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		52537A6F2AF069070093D751 /* TutorialFiles */ = {
+			isa = PBXGroup;
+			children = (
+				52537A632AF005100093D751 /* AtStateWithClasses.swift */,
+				52537A652AF014FA0093D751 /* sheetsExample.swift */,
+				52537A672AF030D60093D751 /* onDeleteExample.swift */,
+				52537A692AF03BF90093D751 /* UserPreferencesExample.swift */,
+				52537A6B2AF04CA30093D751 /* CodeableExample.swift */,
+			);
+			path = TutorialFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +166,7 @@
 				52537A6A2AF03BF90093D751 /* UserPreferencesExample.swift in Sources */,
 				52537A642AF005100093D751 /* AtStateWithClasses.swift in Sources */,
 				52537A582AEFFADD0093D751 /* ContentView.swift in Sources */,
+				52537A6E2AF068FC0093D751 /* AddExpenseView.swift in Sources */,
 				52537A6C2AF04CA30093D751 /* CodeableExample.swift in Sources */,
 				52537A662AF014FA0093D751 /* sheetsExample.swift in Sources */,
 				52537A562AEFFADD0093D751 /* iExpenseApp.swift in Sources */,
