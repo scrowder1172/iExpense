@@ -21,8 +21,14 @@ class Expenses {
     var items: [ExpenseItem] = [ExpenseItem]()
 }
 
+enum ExpenseType {
+    case Personal, Business
+}
+
 struct ContentView: View {
     @State private var expenses: Expenses = Expenses()
+    
+    @State private var showingNewExpense: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -35,10 +41,14 @@ struct ContentView: View {
             .navigationTitle("iExpense")
             .toolbar {
                 Button("Add Example Item", systemImage: "plus") {
-                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
-                    expenses.items.append(expense)
+//                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
+//                    expenses.items.append(expense)
+                    showingNewExpense = true
                 }
             }
+        }
+        .sheet(isPresented: $showingNewExpense) {
+            AddExpenseView(expenses: expenses)
         }
     }
     
