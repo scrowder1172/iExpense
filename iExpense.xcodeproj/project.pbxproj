@@ -63,12 +63,12 @@
 		52537A542AEFFADD0093D751 /* iExpense */ = {
 			isa = PBXGroup;
 			children = (
-				52537A6F2AF069070093D751 /* TutorialFiles */,
 				52537A552AEFFADD0093D751 /* iExpenseApp.swift */,
 				52537A572AEFFADD0093D751 /* ContentView.swift */,
-				52537A592AEFFADE0093D751 /* Assets.xcassets */,
-				52537A5B2AEFFADE0093D751 /* Preview Content */,
 				52537A6D2AF068FC0093D751 /* AddExpenseView.swift */,
+				52537A592AEFFADE0093D751 /* Assets.xcassets */,
+				52537A6F2AF069070093D751 /* TutorialFiles */,
+				52537A5B2AEFFADE0093D751 /* Preview Content */,
 			);
 			path = iExpense;
 			sourceTree = "<group>";
