@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct ExpenseItem {
+struct ExpenseItem: Identifiable {
     // struct containing expense details
+    let id: UUID = UUID()
     let name: String
     let type: String
     let amount: Double
@@ -21,11 +22,28 @@ class Expenses {
 }
 
 struct ContentView: View {
+    @State private var expenses: Expenses = Expenses()
+    
     var body: some View {
-        VStack {
-            
+        NavigationStack {
+            List {
+                ForEach(expenses.items) {item in
+                    Text(item.name)
+                }
+                .onDelete(perform: removeItem)
+            }
+            .navigationTitle("iExpense")
+            .toolbar {
+                Button("Add Example Item", systemImage: "plus") {
+                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
+                    expenses.items.append(expense)
+                }
+            }
         }
-        .padding()
+    }
+    
+    func removeItem(at offset: IndexSet) {
+        expenses.items.remove(atOffsets: offset)
     }
 }
 
