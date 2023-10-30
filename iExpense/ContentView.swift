@@ -11,6 +11,9 @@ struct ContentView: View {
     var body: some View {
         VStack {
             UserPreferencesExample()
+            Rectangle()
+                .frame(width: .infinity, height: 1)
+            CodeableExample()
         }
         .padding()
     }
