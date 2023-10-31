@@ -32,12 +32,12 @@ struct ExpenseReport: View {
     }
     
     func getExpenses() {
-        businessExpenses = formatAsUSCurrency(expenses.calculateBusinessExpenses())
-        personalExpenses = formatAsUSCurrency(expenses.calculatePersonalExpenses())
+        businessExpenses = formatAsCurrency(expenses.calculateBusinessExpenses())
+        personalExpenses = formatAsCurrency(expenses.calculatePersonalExpenses())
         
     }
     
-    func formatAsUSCurrency(_ amount: Double) -> String {
+    func formatAsCurrency(_ amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.currencyCode = Locale.current.currency?.identifier ?? "USD"
