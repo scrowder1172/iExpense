@@ -16,6 +16,8 @@ struct AddExpenseView: View {
     
     var expenses: Expenses
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -31,6 +33,13 @@ struct AddExpenseView: View {
                     .keyboardType(.decimalPad)
             }
             .navigationTitle("Add new expense")
+            .toolbar {
+                Button("Save Expense") {
+                    let expenseItem: ExpenseItem = ExpenseItem(name: name, type: type, amount: amount)
+                    expenses.items.append(expenseItem)
+                    dismiss()
+                }
+            }
         }
     }
 }
