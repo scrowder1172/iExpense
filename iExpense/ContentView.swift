@@ -144,9 +144,7 @@ struct ContentView: View {
             }
             .navigationTitle("iExpense")
             .toolbar {
-                Button("Add Example Item", systemImage: "plus") {
-//                    let expense = ExpenseItem(name: "Test", type: "Personal", amount: 5)
-//                    expenses.items.append(expense)
+                Button("Add Item", systemImage: "plus") {
                     showingNewExpense = true
                 }
                 Button("Configure", systemImage: "gearshape") {
