@@ -69,6 +69,8 @@ enum ExpenseType {
 struct HStackItem: View {
     // Formatted version of item entries
     let expenseItem: ExpenseItem
+    let lowAmount: Double = UserDefaults.standard.double(forKey: "lowAmount") == 0 ? 10 : UserDefaults.standard.double(forKey: "lowAmount")
+    let highAmount: Double = UserDefaults.standard.double(forKey: "highAmount") == 0 ? 100 : UserDefaults.standard.double(forKey: "highAmount")
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -80,7 +82,7 @@ struct HStackItem: View {
             Spacer()
             VStack(alignment: .trailing) {
                 Text(expenseItem.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
-                    .foregroundStyle(expenseItem.amount < 10 ? .blue : expenseItem.amount < 100 ? .green : .red)
+                    .foregroundStyle(expenseItem.amount < lowAmount ? .blue : expenseItem.amount < highAmount ? .green : .red)
                 Text(expenseItem.dateAdded.formatted(date: .numeric, time: .omitted))
             }
             
@@ -114,6 +116,7 @@ struct ContentView: View {
     
     @State private var showingNewExpense: Bool = false
     @State private var showingExpenseReport: Bool = false
+    @State private var showingUserConfiguration: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -147,7 +150,7 @@ struct ContentView: View {
                     showingNewExpense = true
                 }
                 Button("Configure", systemImage: "gearshape") {
-                    
+                    showingUserConfiguration = true
                 }
             }
             ExpenseButton(label: "View Report") {
@@ -159,6 +162,9 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showingExpenseReport) {
             ExpenseReport(expenses: expenses)
+        }
+        .sheet(isPresented: $showingUserConfiguration) {
+            UserConfigurations()
         }
     }
     
