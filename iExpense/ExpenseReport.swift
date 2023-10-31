@@ -22,13 +22,9 @@ struct ExpenseReport: View {
                 .offset(x: 0, y: -150)
             Text("Business Expenses: \(businessExpenses)")
             Text("Personal Expenses: \(personalExpenses)")
-            Button("Close Report") {
+            ExpenseButton(label: "Close Report") {
                 dismiss()
             }
-            .frame(width: 200, height: 30)
-            .background(.blue)
-            .foregroundStyle(.white)
-            .clipShape(.rect(cornerRadius: 20))
             .offset(x: 0, y: 150)
             
         }
@@ -44,7 +40,7 @@ struct ExpenseReport: View {
     func formatAsUSCurrency(_ amount: Double) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.currencyCode = "USD"
+        formatter.currencyCode = Locale.current.currency?.identifier ?? "USD"
 
         if let formattedAmount = formatter.string(from: NSNumber(value: amount)) {
             return formattedAmount
