@@ -20,8 +20,8 @@ struct ExpenseReport: View {
             Text("Expense Report")
                 .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).bold().underline()
                 .offset(x: 0, y: -150)
-            Text("Business Expenses: \(businessExpenses)")
             Text("Personal Expenses: \(personalExpenses)")
+            Text("Business Expenses: \(businessExpenses)")
             ExpenseButton(label: "Close Report") {
                 dismiss()
             }
