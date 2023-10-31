@@ -8,11 +8,52 @@
 import SwiftUI
 
 struct ExpenseReport: View {
+    
+    var expenses: Expenses
+    @State private var businessExpenses: String = ""
+    @State private var personalExpenses: String = ""
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Expense Report")
+                .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/).bold().underline()
+                .offset(x: 0, y: -150)
+            Text("Business Expenses: \(businessExpenses)")
+            Text("Personal Expenses: \(personalExpenses)")
+            Button("Close Report") {
+                dismiss()
+            }
+            .frame(width: 200, height: 30)
+            .background(.blue)
+            .foregroundStyle(.white)
+            .clipShape(.rect(cornerRadius: 20))
+            .offset(x: 0, y: 150)
+            
+        }
+        .onAppear(perform: getExpenses)
+    }
+    
+    func getExpenses() {
+        businessExpenses = formatAsUSCurrency(expenses.calculateBusinessExpenses())
+        personalExpenses = formatAsUSCurrency(expenses.calculatePersonalExpenses())
+        
+    }
+    
+    func formatAsUSCurrency(_ amount: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencyCode = "USD"
+
+        if let formattedAmount = formatter.string(from: NSNumber(value: amount)) {
+            return formattedAmount
+        } else {
+            return "Error formatting amount"
+        }
     }
 }
 
 #Preview {
-    ExpenseReport()
+    ExpenseReport(expenses: Expenses())
 }
