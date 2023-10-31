@@ -14,6 +14,7 @@ struct ExpenseItem: Identifiable, Codable {
     let name: String
     let type: String
     let amount: Double
+    var dateAdded: Date = Date()
 }
 
 @Observable
@@ -65,6 +66,49 @@ enum ExpenseType {
     case Personal, Business
 }
 
+struct HStackItem: View {
+    // Formatted version of item entries
+    let expenseItem: ExpenseItem
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(expenseItem.name)
+                    .font(.headline)
+                Text(expenseItem.type)
+                    .font(.subheadline)
+            }
+            Spacer()
+            VStack(alignment: .trailing) {
+                Text(expenseItem.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                    .foregroundStyle(expenseItem.amount < 10 ? .blue : expenseItem.amount < 100 ? .green : .red)
+                Text(expenseItem.dateAdded.formatted(date: .numeric, time: .omitted))
+            }
+            
+        }
+    }
+}
+
+struct ExpenseButton: View {
+    // custom button with consistent formatting and ability to click anywhere on button
+    let label: String
+    let action: () -> Void
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(.blue)
+                
+                Text(label)
+                    .foregroundStyle(.white)
+                    .bold()
+            }
+        }
+        .frame(width: 200, height: 30)
+    }
+}
+
 struct ContentView: View {
     @State private var expenses: Expenses = Expenses()
     
@@ -74,19 +118,26 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(expenses.items) {item in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(item.name)
-                                .font(.headline)
-                            Text(item.type)
-                                .font(.subheadline)
+                Section("Personal Expenses") {
+                    ForEach(expenses.items) {item in
+                        if item.type == "Personal" {
+                            HStackItem(expenseItem: item)
                         }
-                        Spacer()
-                        Text(item.amount, format: .currency(code: "USD"))
+                        
                     }
+                    .onDelete(perform: removeItem)
                 }
-                .onDelete(perform: removeItem)
+                
+                Section("Business Expenses") {
+                    ForEach(expenses.items) {item in
+                        if item.type == "Business" {
+                            HStackItem(expenseItem: item)
+                        }
+                        
+                    }
+                    .onDelete(perform: removeItem)
+                }
+                
             }
             .navigationTitle("iExpense")
             .toolbar {
@@ -95,14 +146,13 @@ struct ContentView: View {
 //                    expenses.items.append(expense)
                     showingNewExpense = true
                 }
+                Button("Configure", systemImage: "gearshape") {
+                    
+                }
             }
-            Button("View Report") {
+            ExpenseButton(label: "View Report") {
                 showingExpenseReport = true
             }
-            .frame(width: 200, height: 30)
-            .background(.blue)
-            .foregroundStyle(.white)
-            .clipShape(.rect(cornerRadius: 20))
         }
         .sheet(isPresented: $showingNewExpense) {
             AddExpenseView(expenses: expenses)
