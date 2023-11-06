@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddExpenseView: View {
-    @State private var name: String = ""
+    @State private var name: String = "New Expense"
     @State private var type: String = "Personal"
     @State private var amount: Double = 0.0
     
@@ -32,19 +32,19 @@ struct AddExpenseView: View {
                 TextField("Amount", value: $amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                     .keyboardType(.decimalPad)
             }
-            .navigationTitle("Add new expense")
+            .navigationTitle($name)
             .navigationBarBackButtonHidden()
-            
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save Expense") {
+                    Button("Save") {
                         let expenseItem: ExpenseItem = ExpenseItem(name: name, type: type, amount: amount)
                         expenses.items.append(expenseItem)
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button("Cancel", role: .cancel) {
                         dismiss()
                     }
                 }
