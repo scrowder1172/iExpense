@@ -33,11 +33,20 @@ struct AddExpenseView: View {
                     .keyboardType(.decimalPad)
             }
             .navigationTitle("Add new expense")
+            .navigationBarBackButtonHidden()
+            
             .toolbar {
-                Button("Save Expense") {
-                    let expenseItem: ExpenseItem = ExpenseItem(name: name, type: type, amount: amount)
-                    expenses.items.append(expenseItem)
-                    dismiss()
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save Expense") {
+                        let expenseItem: ExpenseItem = ExpenseItem(name: name, type: type, amount: amount)
+                        expenses.items.append(expenseItem)
+                        dismiss()
+                    }
+                }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
                 }
             }
         }

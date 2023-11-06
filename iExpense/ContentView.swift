@@ -144,8 +144,10 @@ struct ContentView: View {
             }
             .navigationTitle("iExpense")
             .toolbar {
-                Button("Add Item", systemImage: "plus") {
-                    showingNewExpense = true
+                NavigationLink {
+                    AddExpenseView(expenses: expenses)
+                } label: {
+                    Label("Add Item", systemImage: "plus")
                 }
                 Button("Configure", systemImage: "gearshape") {
                     showingUserConfiguration = true
@@ -154,9 +156,6 @@ struct ContentView: View {
             ExpenseButton(label: "View Report") {
                 showingExpenseReport = true
             }
-        }
-        .sheet(isPresented: $showingNewExpense) {
-            AddExpenseView(expenses: expenses)
         }
         .sheet(isPresented: $showingExpenseReport) {
             ExpenseReport(expenses: expenses)
