@@ -114,7 +114,6 @@ struct ExpenseButton: View {
 struct ContentView: View {
     @State private var expenses: Expenses = Expenses()
     
-    @State private var showingNewExpense: Bool = false
     @State private var showingExpenseReport: Bool = false
     @State private var showingUserConfiguration: Bool = false
     
