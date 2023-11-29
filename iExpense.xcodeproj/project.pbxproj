@@ -81,9 +81,9 @@
 				52537A762AF14FE90093D751 /* ExpenseReport.swift */,
 				52537A782AF162010093D751 /* UserConfigurations.swift */,
 				520663782B17D5DB0000D2EB /* ExpenseItem.swift */,
-				5206637A2B17E6AF0000D2EB /* Expenses.swift */,
 				5206637C2B17E6E20000D2EB /* CustomViews.swift */,
 				5206637E2B17E7500000D2EB /* ExpenseListView.swift */,
+				525EFA7A2B180296000CDC61 /* Obsolete */,
 				52537A592AEFFADE0093D751 /* Assets.xcassets */,
 				52537A6F2AF069070093D751 /* TutorialFiles */,
 				52537A5B2AEFFADE0093D751 /* Preview Content */,
@@ -109,6 +109,14 @@
 				52537A6B2AF04CA30093D751 /* CodeableExample.swift */,
 			);
 			path = TutorialFiles;
+			sourceTree = "<group>";
+		};
+		525EFA7A2B180296000CDC61 /* Obsolete */ = {
+			isa = PBXGroup;
+			children = (
+				5206637A2B17E6AF0000D2EB /* Expenses.swift */,
+			);
+			path = Obsolete;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
