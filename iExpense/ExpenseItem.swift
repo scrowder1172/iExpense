@@ -8,19 +8,23 @@
 import Foundation
 import SwiftData
 
+enum ExpenseType: String, Codable, Identifiable, CaseIterable {
+    var id: String { self.rawValue }
+    case personal = "Personal"
+    case business = "Business"
+}
+
+
 @Model final class ExpenseItem {
-    var id: UUID = UUID()
     let name: String
-    let type: String
+    var type: ExpenseType
     let amount: Double
     var dateAdded: Date = Date()
     
-    init(id: UUID, name: String, type: String, amount: Double, dateAdded: Date) {
-        self.id = id
+    init(name: String, type: ExpenseType, amount: Double) {
         self.name = name
         self.type = type
         self.amount = amount
-        self.dateAdded = dateAdded
     }
 }
 
