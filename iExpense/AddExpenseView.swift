@@ -38,7 +38,7 @@ struct AddExpenseView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let expenseItem: ExpenseItem = ExpenseItem(name: name, type: type, amount: amount)
+                        let expenseItem: ExpenseThing = ExpenseThing(name: name, type: type, amount: amount)
                         expenses.items.append(expenseItem)
                         dismiss()
                     }

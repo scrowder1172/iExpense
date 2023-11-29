@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExpenseItem: Identifiable, Codable {
+struct ExpenseThing: Identifiable, Codable {
     // struct containing expense details
     // added Codable to allow for encoding and decoding of items
     var id: UUID = UUID()
@@ -20,7 +20,7 @@ struct ExpenseItem: Identifiable, Codable {
 @Observable
 class Expenses {
     // class containing an array of expenses
-    var items: [ExpenseItem] = [ExpenseItem]() {
+    var items: [ExpenseThing] = [ExpenseThing]() {
         didSet {
             // save items as they are added
             if let encoded = try? JSONEncoder().encode(items) {
@@ -32,7 +32,7 @@ class Expenses {
     init() {
         // check if items exist and reload them otherwise create empty array
         if let savedItems = UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
+            if let decodedItems = try? JSONDecoder().decode([ExpenseThing].self, from: savedItems) {
                 items = decodedItems
                 return
             }
@@ -68,7 +68,7 @@ enum ExpenseType {
 
 struct HStackItem: View {
     // Formatted version of item entries
-    let expenseItem: ExpenseItem
+    let expenseItem: ExpenseThing
     let lowAmount: Double = UserDefaults.standard.double(forKey: "lowAmount") == 0 ? 10 : UserDefaults.standard.double(forKey: "lowAmount")
     let highAmount: Double = UserDefaults.standard.double(forKey: "highAmount") == 0 ? 100 : UserDefaults.standard.double(forKey: "highAmount")
     var body: some View {
