@@ -160,7 +160,7 @@ struct ContentView: View {
             AddExpenseView()
         }
         .sheet(isPresented: $showingExpenseReport) {
-            ExpenseReport(expenses: originalExpenses)
+            ExpenseReport()
         }
         .sheet(isPresented: $showingUserConfiguration) {
             UserConfigurations()
