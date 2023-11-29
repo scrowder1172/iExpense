@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ExpenseReport: View {
+    @Environment(\.modelContext) var modelContext
+    @Query(sort: \ExpenseItem.name) var expenses: [ExpenseItem]
     
-    var expenses: Expenses
     @State private var businessExpenses: String = ""
     @State private var personalExpenses: String = ""
     
@@ -31,9 +33,29 @@ struct ExpenseReport: View {
         .onAppear(perform: getExpenses)
     }
     
+    private func calculateBusinessExpenses() -> Double {
+        var total: Double = 0.0
+        for item in expenses {
+            if item.type == .business {
+                total += item.amount
+            }
+        }
+        return total
+    }
+    
+    private func calculatePersonalExpenses() -> Double {
+        var total: Double = 0.0
+        for item in expenses {
+            if item.type == .personal {
+                total += item.amount
+            }
+        }
+        return total
+    }
+    
     func getExpenses() {
-        businessExpenses = formatAsCurrency(expenses.calculateBusinessExpenses())
-        personalExpenses = formatAsCurrency(expenses.calculatePersonalExpenses())
+        businessExpenses = formatAsCurrency(calculateBusinessExpenses())
+        personalExpenses = formatAsCurrency(calculatePersonalExpenses())
         
     }
     
@@ -51,5 +73,5 @@ struct ExpenseReport: View {
 }
 
 #Preview {
-    ExpenseReport(expenses: Expenses())
+    ExpenseReport()
 }
