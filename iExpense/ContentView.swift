@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ExpenseThing: Identifiable, Codable {
     // struct containing expense details
@@ -62,13 +63,9 @@ class Expenses {
     }
 }
 
-enum ExpenseType {
-    case Personal, Business
-}
-
 struct HStackItem: View {
     // Formatted version of item entries
-    let expenseItem: ExpenseThing
+    let expenseItem: ExpenseItem
     let lowAmount: Double = UserDefaults.standard.double(forKey: "lowAmount") == 0 ? 10 : UserDefaults.standard.double(forKey: "lowAmount")
     let highAmount: Double = UserDefaults.standard.double(forKey: "highAmount") == 0 ? 100 : UserDefaults.standard.double(forKey: "highAmount")
     var body: some View {
@@ -76,7 +73,7 @@ struct HStackItem: View {
             VStack(alignment: .leading) {
                 Text(expenseItem.name)
                     .font(.headline)
-                Text(expenseItem.type)
+                Text(expenseItem.type.rawValue)
                     .font(.subheadline)
             }
             Spacer()
@@ -112,42 +109,45 @@ struct ExpenseButton: View {
 }
 
 struct ContentView: View {
-    @State private var expenses: Expenses = Expenses()
+    @Environment(\.modelContext) var modelContext
+    @Query(sort: \ExpenseItem.name) var expenses: [ExpenseItem]
+    @State private var path = [ExpenseItem]()
+    
+    @State private var originalExpenses: Expenses = Expenses()
     
     @State private var showingExpenseReport: Bool = false
     @State private var showingUserConfiguration: Bool = false
+    @State private var showingAddExpense: Bool = false
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List {
-                Section("Personal Expenses") {
-                    ForEach(expenses.items) {item in
-                        if item.type == "Personal" {
-                            HStackItem(expenseItem: item)
+                Section("Personal") {
+                    ForEach(expenses) { expense in
+                        if expense.type == .personal {
+                            HStackItem(expenseItem: expense)
                         }
-                        
                     }
-                    .onDelete(perform: removeItem)
+                    .onDelete(perform: removeExpenses)
                 }
                 
-                Section("Business Expenses") {
-                    ForEach(expenses.items) {item in
-                        if item.type == "Business" {
-                            HStackItem(expenseItem: item)
+                Section("Business") {
+                    ForEach(expenses) { expense in
+                        if expense.type == .business {
+                            HStackItem(expenseItem: expense)
                         }
-                        
                     }
-                    .onDelete(perform: removeItem)
+                    .onDelete(perform: removeExpenses)
                 }
-                
             }
             .navigationTitle("iExpense")
             .toolbar {
-                NavigationLink {
-                    AddExpenseView(expenses: expenses)
+                Button {
+                    showingAddExpense = true
                 } label: {
                     Label("Add Item", systemImage: "plus")
                 }
+                
                 Button("Configure", systemImage: "gearshape") {
                     showingUserConfiguration = true
                 }
@@ -156,16 +156,22 @@ struct ContentView: View {
                 showingExpenseReport = true
             }
         }
+        .sheet(isPresented: $showingAddExpense) {
+            AddExpenseView()
+        }
         .sheet(isPresented: $showingExpenseReport) {
-            ExpenseReport(expenses: expenses)
+            ExpenseReport(expenses: originalExpenses)
         }
         .sheet(isPresented: $showingUserConfiguration) {
             UserConfigurations()
         }
     }
     
-    func removeItem(at offset: IndexSet) {
-        expenses.items.remove(atOffsets: offset)
+    func removeExpenses(at offsets: IndexSet) {
+        for offset in offsets {
+            let expense = expenses[offset]
+            modelContext.delete(expense)
+        }
     }
 }
 
