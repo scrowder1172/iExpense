@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct AddExpenseView: View {
-    @State private var name: String = "New Expense"
-    @State private var type: String = "Personal"
-    @State private var amount: Double = 0.0
-    
-    let types: [String] = ["Personal", "Business"]
-    
-    var expenses: Expenses
-    
     @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var modelContext
+    
+    @State private var name: String = "New Expense"
+    @State private var type: ExpenseType = .personal
+    @State private var amount: Double = 0.0
     
     var body: some View {
         NavigationStack {
@@ -24,8 +21,8 @@ struct AddExpenseView: View {
                 TextField("Name", text: $name)
                 
                 Picker("Type", selection: $type) {
-                    ForEach(types, id: \.self) {
-                        Text($0)
+                    ForEach(ExpenseType.allCases) { expenseType in
+                        Text(expenseType.rawValue).tag(expenseType)
                     }
                 }
                 
@@ -38,8 +35,8 @@ struct AddExpenseView: View {
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let expenseItem: ExpenseThing = ExpenseThing(name: name, type: type, amount: amount)
-                        expenses.items.append(expenseItem)
+                        let newExpense: ExpenseItem = ExpenseItem(name: name, type: type, amount: amount)
+                        modelContext.insert(newExpense)
                         dismiss()
                     }
                 }
@@ -54,5 +51,5 @@ struct AddExpenseView: View {
 }
 
 #Preview {
-    AddExpenseView(expenses: Expenses())
+    AddExpenseView()
 }
