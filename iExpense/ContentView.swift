@@ -12,11 +12,13 @@ struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var sortOrder: [SortDescriptor] = [
-        SortDescriptor(\ExpenseItem.name),
-        SortDescriptor(\ExpenseItem.amount)
+        SortDescriptor(\Expense.name),
+        SortDescriptor(\Expense.amount)
     ]
     
-    @State private var path = [ExpenseItem]()
+    @State private var filterExpense: String = ""
+    
+    @State private var path = [Expense]()
     
     @State private var originalExpenses: Expenses = Expenses()
     
@@ -26,7 +28,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack(path: $path) {
-            ExpenseListView(sortOrder: sortOrder)
+            ExpenseListView(sortOrder: sortOrder, filterExpense: filterExpense)
             .navigationTitle("iExpense")
             .toolbar {
                 
@@ -34,15 +36,26 @@ struct ContentView: View {
                     Picker("Sort", selection: $sortOrder) {
                         Text("Sort by Name")
                             .tag([
-                                SortDescriptor(\ExpenseItem.name),
-                                SortDescriptor(\ExpenseItem.amount)
+                                SortDescriptor(\Expense.name),
+                                SortDescriptor(\Expense.amount)
                             ])
                         
                         Text("Sort by Amount")
                             .tag([
-                                SortDescriptor(\ExpenseItem.amount),
-                                SortDescriptor(\ExpenseItem.name)
+                                SortDescriptor(\Expense.amount),
+                                SortDescriptor(\Expense.name)
                             ])
+                    }
+                    
+                    Picker("Filter", selection: $filterExpense) {
+                        Text("Show All")
+                            .tag("")
+                        
+                        Text("Show Personal Only")
+                            .tag("Personal")
+                        
+                        Text("Show Business Only")
+                            .tag("Business")
                     }
                 }
                 
