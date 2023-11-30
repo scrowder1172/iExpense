@@ -14,29 +14,15 @@ enum ExpenseType: String, Codable, Identifiable, CaseIterable {
     case business = "Business"
 }
 
-
-@Model final class ExpenseItem {
+@Model final class Expense {
     let name: String
-    var type: ExpenseType
+    var type: String
     let amount: Double
     var dateAdded: Date = Date()
     
-    init(name: String, type: ExpenseType, amount: Double) {
+    init(name: String, type: String, amount: Double) {
         self.name = name
         self.type = type
         self.amount = amount
     }
 }
-
-/*
- struct ExpenseThing: Identifiable, Codable {
-     // struct containing expense details
-     // added Codable to allow for encoding and decoding of items
-     var id: UUID = UUID()
-     let name: String
-     let type: String
-     let amount: Double
-     var dateAdded: Date = Date()
- }
- 
- */

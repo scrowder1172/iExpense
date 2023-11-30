@@ -10,7 +10,7 @@ import SwiftData
 
 struct ExpenseReport: View {
     @Environment(\.modelContext) var modelContext
-    @Query(sort: \ExpenseItem.name) var expenses: [ExpenseItem]
+    @Query(sort: \Expense.name) var expenses: [Expense]
     
     @State private var businessExpenses: String = ""
     @State private var personalExpenses: String = ""
@@ -36,7 +36,7 @@ struct ExpenseReport: View {
     private func calculateBusinessExpenses() -> Double {
         var total: Double = 0.0
         for item in expenses {
-            if item.type == .business {
+            if item.type == ExpenseType.business.rawValue {
                 total += item.amount
             }
         }
@@ -46,7 +46,7 @@ struct ExpenseReport: View {
     private func calculatePersonalExpenses() -> Double {
         var total: Double = 0.0
         for item in expenses {
-            if item.type == .personal {
+            if item.type == ExpenseType.personal.rawValue {
                 total += item.amount
             }
         }

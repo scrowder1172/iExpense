@@ -10,7 +10,7 @@ import SwiftUI
 
 struct HStackItem: View {
     // Formatted version of item entries
-    let expenseItem: ExpenseItem
+    let expenseItem: Expense
     let lowAmount: Double = UserDefaults.standard.double(forKey: "lowAmount") == 0 ? 10 : UserDefaults.standard.double(forKey: "lowAmount")
     let highAmount: Double = UserDefaults.standard.double(forKey: "highAmount") == 0 ? 100 : UserDefaults.standard.double(forKey: "highAmount")
     var body: some View {
@@ -18,7 +18,7 @@ struct HStackItem: View {
             VStack(alignment: .leading) {
                 Text(expenseItem.name)
                     .font(.headline)
-                Text(expenseItem.type.rawValue)
+                Text(expenseItem.type)
                     .font(.subheadline)
             }
             Spacer()
