@@ -23,12 +23,14 @@ struct HStackItem: View {
             }
             Spacer()
             VStack(alignment: .trailing) {
-                Text(expenseItem.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+                Text(expenseItem.currency_amount)
                     .foregroundStyle(expenseItem.amount < lowAmount ? .blue : expenseItem.amount < highAmount ? .green : .red)
                 Text(expenseItem.dateAdded.formatted(date: .numeric, time: .omitted))
             }
-            
         }
+        .accessibilityElement()
+        .accessibilityLabel("\(expenseItem.name), \(expenseItem.currency_amount)")
+        .accessibilityHint("\(expenseItem.type)")
     }
 }
 
