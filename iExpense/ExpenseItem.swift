@@ -20,6 +20,12 @@ enum ExpenseType: String, Codable, Identifiable, CaseIterable {
     let amount: Double
     var dateAdded: Date = Date()
     
+    var currency_amount: String {
+        //amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD")
+        amount.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD"))
+        
+    }
+    
     init(name: String, type: String, amount: Double) {
         self.name = name
         self.type = type
